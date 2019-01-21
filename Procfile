@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod $JAVA_OPT S -jar target/cursomc-0.0.1-SNAPSHOT.jar     
