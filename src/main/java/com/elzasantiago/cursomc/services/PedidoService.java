@@ -32,6 +32,8 @@ private PagamentoRepository pagamentoRepository;
 @Autowired
 private ProdutoService produtoService;
 
+@Autowired
+private EmailService emailService;
 
 @Autowired
 private ClienteService clienteService;
@@ -66,7 +68,8 @@ private ItemPedidoRepository itemPedidoRepository;
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		//System.out.println(obj);
+		emailService.senderOrderConfirmationEmail(obj);
 		return obj;
 	}
 	
