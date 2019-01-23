@@ -14,7 +14,6 @@ import com.elzasantiago.cursomc.domain.enums.EstadoPagamento;
 import com.elzasantiago.cursomc.repositories.ItemPedidoRepository;
 import com.elzasantiago.cursomc.repositories.PagamentoRepository;
 import com.elzasantiago.cursomc.repositories.PedidoRepository;
-import com.elzasantiago.cursomc.repositories.ProdutoRepository;
 import com.elzasantiago.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -69,7 +68,7 @@ private ItemPedidoRepository itemPedidoRepository;
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
 		//System.out.println(obj);
-		emailService.senderOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
 	
