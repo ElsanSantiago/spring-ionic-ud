@@ -20,6 +20,7 @@ import com.elzasantiago.cursomc.domain.PagamentoComCartao;
 import com.elzasantiago.cursomc.domain.Pedido;
 import com.elzasantiago.cursomc.domain.Produto;
 import com.elzasantiago.cursomc.domain.enums.EstadoPagamento;
+import com.elzasantiago.cursomc.domain.enums.Perfil;
 import com.elzasantiago.cursomc.domain.enums.TipoCliente;
 import com.elzasantiago.cursomc.repositories.CategoriaRepository;
 import com.elzasantiago.cursomc.repositories.CidadeRepository;
@@ -130,14 +131,21 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Cliente cli1 = new Cliente(null, "Elza Maria Novais Santiago", "elzansantiago51@gmail.com", "10490175520", TipoCliente.PESSOAFISICA, pe.encode("123"));
-		
 		cli1.getTelefones().addAll(Arrays.asList("976567670", "986837354"));
+		
+		Cliente cli2 = new Cliente(null, "Filipe Tadeu Santiago da Silva", "elzansantiago@gmail.com", "12718954710", TipoCliente.PESSOAFISICA, pe.encode("123"));
+		cli2.getTelefones().addAll(Arrays.asList("980059238", "986837348"));
+		cli2.addPerfil(Perfil.ADMIN);
 		
 		Endereco e1 = new Endereco(null, "Rua Mem de Sá", "82", "apto.402", "Icaraí", "24220.261", cli1, c1 );
 		Endereco e2 = new Endereco(null, "Avenida Mattos", "105", "Sala 402", "Centro", "24220.261", cli1, c2 );
-			
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		Endereco e3 = new Endereco(null, "Rua Mem de Sá", "82", "apto.402", "Icaraí", "24220.261", cli2, c1 );
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
@@ -151,6 +159,7 @@ public class DBService {
 		ped2.setPagamento(pagto2);
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
 				
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
